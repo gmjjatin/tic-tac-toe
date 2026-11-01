@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="82" y1="0" x2="1097" y2="677" gradientUnits="userSpaceOnUse"><stop stop-color="#13263a"/><stop offset="1" stop-color="#0c1420"/></linearGradient>
+    <radialGradient id="wash" cx="0" cy="0" r="1" gradientTransform="matrix(425 353 -411 495 854 275)" gradientUnits="userSpaceOnUse"><stop stop-color="#314659" stop-opacity=".8"/><stop offset="1" stop-color="#101827" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v630H0z"/><path fill="url(#wash)" d="M0 0h1200v630H0z"/>
+  <g opacity=".16" stroke="#8ca2b5"><path d="M54 65h1092M54 565h1092"/><path d="M94 0v630M1106 0v630"/></g>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <text x="90" y="148" fill="#94e3c1" font-size="15" font-weight="700" letter-spacing="4">THE FRIENDLY FACE-OFF</text>
+    <text x="80" y="283" fill="#f5f7fb" font-size="100" font-weight="800" letter-spacing="-6">TIC</text>
+    <text x="80" y="385" fill="#f5f7fb" font-size="100" font-weight="800" letter-spacing="-6">TAC</text>
+    <text x="80" y="487" fill="#f5f7fb" font-size="100" font-weight="800" letter-spacing="-6">TOE<tspan fill="#94e3c1">.</tspan></text>
+    <text x="90" y="544" fill="#b2c0cf" font-size="21">Your move. Their move. One more round?</text>
+  </g>
+  <g transform="rotate(7 848 315)">
+    <rect x="640" y="105" width="425" height="425" rx="44" fill="#0b111a" opacity=".36"/>
+    <rect x="625" y="90" width="425" height="425" rx="44" fill="#f0f3ed"/>
+    <rect x="645" y="110" width="385" height="385" rx="30" fill="#dfe8df"/>
+    <g stroke="#bac9c2" stroke-width="3"><path d="M773 110v385M902 110v385M645 238h385M645 367h385"/></g>
+    <rect x="656" y="121" width="106" height="106" rx="18" fill="#fffefa"/><path d="m683 148 52 52m0-52-52 52" stroke="#2793a5" stroke-width="15" stroke-linecap="round"/>
+    <rect x="785" y="250" width="106" height="106" rx="18" fill="#fffefa"/><circle cx="838" cy="303" r="27" stroke="#e58168" stroke-width="14"/>
+    <rect x="914" y="379" width="106" height="106" rx="18" fill="#fffefa"/><path d="m941 406 52 52m0-52-52 52" stroke="#2793a5" stroke-width="15" stroke-linecap="round"/>
+    <path d="M694 340c17-17 39-17 56 0" stroke="#e58168" stroke-width="10" stroke-linecap="round"/><circle cx="965" cy="186" r="27" stroke="#2793a5" stroke-width="13"/>
+  </g>
+  <circle cx="1092" cy="115" r="9" fill="#e58168"/><circle cx="1117" cy="115" r="9" fill="#94e3c1"/><circle cx="1142" cy="115" r="9" fill="#82d9f5"/>
+</svg>

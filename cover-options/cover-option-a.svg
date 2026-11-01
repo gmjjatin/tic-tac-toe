@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="32" x2="1127" y2="640" gradientUnits="userSpaceOnUse"><stop stop-color="#17283e"/><stop offset=".55" stop-color="#101827"/><stop offset="1" stop-color="#0d1420"/></linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(368 323 -302 344 894 304)" gradientUnits="userSpaceOnUse"><stop stop-color="#365b67" stop-opacity=".62"/><stop offset="1" stop-color="#142033" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mint" x1="751" y1="205" x2="1051" y2="478" gradientUnits="userSpaceOnUse"><stop stop-color="#b8f1d5"/><stop offset="1" stop-color="#71cfae"/></linearGradient>
+    <filter id="shadow" x="680" y="127" width="435" height="438" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="17"/></filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v630H0z"/><path fill="url(#glow)" d="M0 0h1200v630H0z"/>
+  <circle cx="96" cy="566" r="171" fill="#20364b" opacity=".24"/><circle cx="1122" cy="52" r="190" fill="#20364b" opacity=".2"/>
+  <g opacity=".26" stroke="#4b6275"><path d="M0 104h510M0 510h525M505 0v630" stroke-dasharray="3 11"/></g>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <rect x="88" y="102" width="143" height="37" rx="18.5" fill="#24364b" stroke="#3b5268"/>
+    <circle cx="108" cy="120.5" r="5" fill="#94e3c1"/><text x="124" y="126" fill="#c2d0dd" font-size="13" font-weight="700" letter-spacing="2.2">ONLINE • 2 PLAYERS</text>
+    <text x="84" y="254" fill="#f5f7fb" font-size="83" font-weight="800" letter-spacing="-4">TIC TAC</text>
+    <text x="84" y="344" fill="#f5f7fb" font-size="83" font-weight="800" letter-spacing="-4">TOE</text>
+    <rect x="88" y="380" width="56" height="5" rx="2.5" fill="#94e3c1"/>
+    <text x="88" y="434" fill="#afbdce" font-size="24" font-weight="500">A classic game, better together.</text>
+    <text x="88" y="486" fill="#94e3c1" font-size="16" font-weight="700" letter-spacing="3">CREATE A ROOM · SHARE A LINK · PLAY</text>
+  </g>
+  <rect x="713" y="160" width="375" height="375" rx="31" fill="#94e3c1" opacity=".24" filter="url(#shadow)"/>
+  <rect x="735" y="151" width="356" height="356" rx="30" fill="#182337" stroke="#52677b" stroke-width="2"/>
+  <rect x="755" y="171" width="316" height="316" rx="19" fill="#202e44"/>
+  <g stroke="#43576d" stroke-width="3"><path d="M860.5 171v316M966 171v316M755 276.5h316M755 382h316"/></g>
+  <g stroke-linecap="round" stroke-width="13"><path d="m782 204 53 53m0-53-53 53" stroke="#82d9f5"/><circle cx="914" cy="224" r="26" stroke="#f5a8cd"/><circle cx="1020" cy="329" r="26" stroke="#f5a8cd"/><path d="m888 415 53 53m0-53-53 53" stroke="#82d9f5"/></g>
+  <circle cx="1118" cy="236" r="18" fill="#f5a8cd" opacity=".78"/><path d="M654 485c24-19 47-19 70 0m-70 16c24-19 47-19 70 0" stroke="#82d9f5" stroke-linecap="round" stroke-width="5" opacity=".62"/>
+</svg>
