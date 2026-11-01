@@ -1,1 +1,178 @@
-﻿<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tic Tac Toe</title><style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#101827;color:#f5f7fb;font:16px system-ui}.card{width:min(92vw,440px);padding:30px;border:1px solid #34445c;border-radius:24px;background:#182337}h1{margin:0}.muted{color:#a8b5c8}.row{display:flex;justify-content:space-between;margin:22px 0 14px}.turn{color:#94e3c1;font-weight:bold}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.cell{aspect-ratio:1;border:1px solid #34445c;border-radius:16px;background:#202e44;color:#f5f7fb;font-size:3.5rem;font-weight:bold;cursor:pointer}.cell.x{color:#82d9f5}.cell.o{color:#f5a8cd}.cell.win{background:#315849}.actions{display:flex;gap:10px;margin-top:20px}button.action{border:0;border-radius:12px;padding:12px 16px;font-weight:bold;cursor:pointer}.primary{background:#94e3c1}.secondary{background:#293a54;color:white}</style><main class="card"><h1>Tic Tac Toe</h1><p class="muted">A little friendly rivalry, one square at a time.</p><div class="row"><span id="status" class="turn" aria-live="polite">X's turn</span><span id="score" class="muted">X 0 · Draws 0 · O 0</span></div><div id="board" class="board" role="grid" aria-label="Tic Tac Toe"></div><div class="actions"><button class="action primary" id="new">New round</button><button class="action secondary" id="reset">Reset scores</button></div></main><script>let b=Array(9).fill(''),t='X',end=false,w=[],s={X:0,O:0,D:0};const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],el=document.querySelector('#board'),st=document.querySelector('#status');function draw(){el.innerHTML='';b.forEach((v,i)=>{let x=document.createElement('button');x.className='cell '+v.toLowerCase()+(w.includes(i)?' win':'');x.textContent=v;x.disabled=!!v||end;x.setAttribute('aria-label','Square '+(i+1)+(v?', '+v:''));x.onclick=()=>move(i);el.append(x)});document.querySelector('#score').textContent='X '+s.X+' · Draws '+s.D+' · O '+s.O}function move(i){if(end||b[i])return;b[i]=t;let q=lines.find(l=>l.every(n=>b[n]===t));if(q){end=true;w=q;s[t]++;st.textContent=t+' wins!'}else if(b.every(Boolean)){end=true;s.D++;st.textContent="It's a draw!"}else{t=t==='X'?'O':'X';st.textContent=t+"'s turn"}draw()}function fresh(){b=Array(9).fill('');t='X';end=false;w=[];st.textContent="X's turn";draw()}document.querySelector('#new').onclick=fresh;document.querySelector('#reset').onclick=()=>{s={X:0,O:0,D:0};fresh()};draw();</script></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Create a room, invite a friend, and play Tic Tac Toe together.">
+  <meta name="theme-color" content="#101827">
+  <title>Tic Tac Toe | Play with Friends</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at top,#21354b 0,#101827 58%);color:#f5f7fb;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}.shell{width:min(100%,560px);padding:clamp(22px,6vw,38px);border:1px solid #34445c;border-radius:28px;background:#182337;box-shadow:0 28px 90px #0006}.brand{display:flex;align-items:center;gap:14px}.brand img{width:52px;height:52px}.brand h1{font-size:clamp(1.6rem,7vw,2.2rem);line-height:1.1;margin:0}.tagline,.muted{color:#a8b5c8}.tagline{margin:8px 0 26px}.panel{padding:20px;border:1px solid #34445c;border-radius:18px;background:#131f31}.panel h2{margin:0 0 14px;font-size:1.05rem}.field{display:grid;gap:6px;margin:14px 0}.field label{font-size:.9rem;color:#c4cedc}.field input,.room-input{width:100%;border:1px solid #40536d;border-radius:11px;padding:12px 13px;background:#0f1a2a;color:#f5f7fb;font:inherit}.field input:focus,.room-input:focus,button:focus-visible{outline:3px solid #f5d68b;outline-offset:2px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.button{border:0;border-radius:12px;padding:12px 16px;font:650 1rem system-ui;cursor:pointer;transition:transform .15s,filter .15s}.button:hover:enabled{transform:translateY(-1px);filter:brightness(1.08)}.button:disabled{cursor:not-allowed;opacity:.5}.primary{background:#94e3c1;color:#10251d}.secondary{background:#293a54;color:#f5f7fb}.field-row{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:end}.field-row .field{margin:10px 0 0}.notice{min-height:25px;margin:12px 0 0;color:#f5d68b;font-size:.92rem}.connection{font-size:.86rem;color:#a8b5c8}.topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0}.badge{border:1px solid #34445c;border-radius:999px;padding:5px 10px;color:#a8b5c8;font-size:.82rem}.room{display:flex;align-items:center;gap:9px}.room strong{letter-spacing:.16em;color:#94e3c1}.room input{min-width:0;flex:1}.players{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.player{padding:12px;border:1px solid #34445c;border-radius:13px;background:#202e44}.player.active{border-color:#94e3c1;box-shadow:inset 0 0 0 1px #94e3c1}.player span{display:block}.player .mark{font-size:1.25rem;font-weight:800}.player .name{color:#a8b5c8;font-size:.9rem;overflow-wrap:anywhere}.turn{margin:15px 0;color:#94e3c1;font-weight:700}.board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.cell{aspect-ratio:1;border:1px solid #34445c;border-radius:16px;background:#202e44;color:#f5f7fb;font-size:clamp(2.2rem,15vw,4rem);font-weight:750;cursor:pointer}.cell:hover:enabled{background:#293a54}.cell.x{color:#82d9f5}.cell.o{color:#f5a8cd}.cell.win{background:#315849;border-color:#94e3c1}.footer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap}.scores{font-size:.9rem;color:#a8b5c8}.small{padding:9px 12px;font-size:.9rem}.hidden{display:none!important}button:focus-visible{outline-offset:3px}@media(max-width:420px){.field-row{grid-template-columns:1fr}.field-row .button{width:100%}.players{gap:7px}.player{padding:10px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="brand">
+      <img src="/favicon.svg" alt="" width="52" height="52">
+      <div><h1>Tic Tac Toe</h1><div class="muted">Play with friends</div></div>
+    </header>
+    <p class="tagline">Make a room, share the link, and take turns from your own browser.</p>
+
+    <section id="lobby" class="panel" aria-labelledby="lobby-title">
+      <h2 id="lobby-title">Start a game</h2>
+      <div class="field"><label for="player-name">Your name</label><input id="player-name" maxlength="18" autocomplete="nickname" placeholder="Player"></div>
+      <div class="actions">
+        <button id="create" class="button primary">Create a room</button>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="room-code">Join with a room code</label><input id="room-code" class="room-input" maxlength="6" autocomplete="off" autocapitalize="characters" placeholder="ABC123"></div>
+        <button id="join" class="button secondary">Join room</button>
+      </div>
+      <p id="lobby-notice" class="notice" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="game" class="hidden" aria-label="Game room">
+      <div class="topline"><span class="badge">ROOM <strong id="room-label"></strong></span><span id="connection" class="connection" aria-live="polite">Connecting…</span></div>
+      <div class="room">
+        <input id="invite-link" aria-label="Invitation link" readonly>
+        <button id="copy" class="button secondary small">Copy invite</button>
+      </div>
+      <div class="players">
+        <div id="player-x" class="player"><span class="mark">X</span><span id="name-x" class="name">Waiting…</span></div>
+        <div id="player-o" class="player"><span class="mark">O</span><span id="name-o" class="name">Waiting…</span></div>
+      </div>
+      <p id="turn" class="turn" aria-live="polite">Waiting for the other player…</p>
+      <div id="board" class="board" role="grid" aria-label="Tic Tac Toe board"></div>
+      <div class="footer"><span id="scores" class="scores">X 0 · Draws 0 · O 0</span><div class="actions" style="margin:0"><button id="new-round" class="button primary small hidden">Play again</button><button id="leave" class="button secondary small">Leave room</button></div></div>
+      <p id="game-notice" class="notice" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <script>
+    const lobby = document.querySelector("#lobby");
+    const game = document.querySelector("#game");
+    const nameInput = document.querySelector("#player-name");
+    const roomInput = document.querySelector("#room-code");
+    const lobbyNotice = document.querySelector("#lobby-notice");
+    const gameNotice = document.querySelector("#game-notice");
+    const connectionLabel = document.querySelector("#connection");
+    const boardEl = document.querySelector("#board");
+    const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    const sessionKey = "xo-arena-session-v1";
+    let socket = null;
+    let session = readSession();
+    let gameState = null;
+    let pendingRequest = null;
+    let reconnectTimer = null;
+    let reconnectDelay = 1000;
+    let intentionallyLeaving = false;
+
+    function readSession(){try{return JSON.parse(sessionStorage.getItem(sessionKey)||"null")}catch{return null}}
+    function saveSession(){if(session)sessionStorage.setItem(sessionKey,JSON.stringify(session));else sessionStorage.removeItem(sessionKey)}
+    function setNotice(el,text){el.textContent=text||""}
+    function cleanName(){return nameInput.value.trim().replace(/[<>]/g,"").slice(0,18)||"Player"}
+    function randomCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let code="";for(let i=0;i<6;i++)code+=chars[Math.floor(Math.random()*chars.length)];return code}
+    function socketUrl(){return (location.protocol==="https:"?"wss://":"ws://")+location.host+"/api/server"}
+    function send(data){if(socket&&socket.readyState===WebSocket.OPEN)socket.send(JSON.stringify(data))}
+    function connect(request){
+      if(request)pendingRequest=request;
+      if(socket&&(socket.readyState===WebSocket.OPEN||socket.readyState===WebSocket.CONNECTING))return;
+      intentionallyLeaving=false;
+      connectionLabel.textContent="Connecting…";
+      const ws=new WebSocket(socketUrl());socket=ws;
+      ws.addEventListener("open",()=>{
+        reconnectDelay=1000;connectionLabel.textContent="Connected";
+        const payload=pendingRequest||(session?{type:"join",code:session.code,token:session.token,name:session.name}:null);
+        if(payload)ws.send(JSON.stringify(payload));
+      });
+      ws.addEventListener("message",event=>handleMessage(event.data));
+      ws.addEventListener("error",()=>{connectionLabel.textContent="Connection issue"});
+      ws.addEventListener("close",()=>{
+        connectionLabel.textContent="Disconnected";
+        if(session&&!intentionallyLeaving){
+          connectionLabel.textContent="Reconnecting…";
+          clearTimeout(reconnectTimer);
+          reconnectTimer=setTimeout(()=>{reconnectDelay=Math.min(reconnectDelay*2,15000);connect()},reconnectDelay);
+        }
+      });
+    }
+    function handleMessage(raw){
+      let msg;try{msg=JSON.parse(raw)}catch{return}
+      if(msg.type==="joined"){
+        pendingRequest=null;
+        session={code:msg.code,token:msg.token,mark:msg.mark,name:msg.name};
+        saveSession();
+        lobby.classList.add("hidden");game.classList.remove("hidden");
+        document.querySelector("#room-label").textContent=session.code;
+        document.querySelector("#invite-link").value=location.origin+location.pathname+"?room="+encodeURIComponent(session.code);
+        history.replaceState(null,"","?room="+encodeURIComponent(session.code));
+        setNotice(lobbyNotice,"");setNotice(gameNotice,"");
+        return;
+      }
+      if(msg.type==="state"){
+        gameState=msg;
+        if(session){lobby.classList.add("hidden");game.classList.remove("hidden");document.querySelector("#room-label").textContent=session.code;document.querySelector("#invite-link").value=location.origin+location.pathname+"?room="+encodeURIComponent(session.code)}
+        render();
+        return;
+      }
+      if(msg.type==="error"){
+        pendingRequest=null;
+        setNotice(session?gameNotice:lobbyNotice,msg.message||"Unable to join that room.");
+      }
+    }
+    function startRoom(){
+      setNotice(lobbyNotice,"");
+      const code=randomCode();const token=crypto.randomUUID();const name=cleanName();
+      connect({type:"create",code,token,name});
+    }
+    function joinRoom(){
+      const code=roomInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
+      if(code.length!==6){setNotice(lobbyNotice,"Enter the 6-character room code.");return}
+      setNotice(lobbyNotice,"");
+      const previous=session&&session.code===code?session:null;
+      const token=previous?previous.token:crypto.randomUUID();
+      connect({type:"join",code,token,name:cleanName()});
+    }
+    function render(){
+      if(!gameState||!session)return;
+      const players=gameState.players;
+      document.querySelector("#name-x").textContent=(players.X?.name||"Waiting for X")+(players.X?.connected?"":" · offline");
+      document.querySelector("#name-o").textContent=(players.O?.name||"Waiting for O")+(players.O?.connected?"":" · offline");
+      document.querySelector("#player-x").classList.toggle("active",gameState.phase==="playing"&&gameState.turn==="X");
+      document.querySelector("#player-o").classList.toggle("active",gameState.phase==="playing"&&gameState.turn==="O");
+      document.querySelector("#scores").textContent="X "+gameState.scores.X+" · Draws "+gameState.scores.draws+" · O "+gameState.scores.O;
+      const turn=document.querySelector("#turn");
+      if(gameState.phase==="waiting")turn.textContent=players.X?.connected&&players.O?.connected?"Reconnecting to the game…":"Waiting for both players to be connected. Share the invite link.";
+      else if(gameState.winner==="draw")turn.textContent="It's a draw!";
+      else if(gameState.winner)turn.textContent=gameState.winner===session.mark?"You win!":"The other player wins.";
+      else turn.textContent=gameState.turn===session.mark?"Your turn":"Their turn";
+      const canRestart=gameState.phase==="finished";
+      document.querySelector("#new-round").classList.toggle("hidden",!canRestart);
+      boardEl.innerHTML="";
+      gameState.board.forEach((value,index)=>{
+        const button=document.createElement("button");
+        button.type="button";button.className="cell"+(value?" "+value.toLowerCase():"")+(gameState.winningLine?.includes(index)?" win":"");
+        button.textContent=value||"";button.setAttribute("role","gridcell");
+        button.setAttribute("aria-label","Square "+(index+1)+(value?", "+value:""));
+        button.disabled=gameState.phase!=="playing"||gameState.turn!==session.mark||!!value;
+        button.addEventListener("click",()=>send({type:"move",index}));
+        boardEl.append(button);
+      });
+    }
+    document.querySelector("#create").addEventListener("click",startRoom);
+    document.querySelector("#join").addEventListener("click",joinRoom);
+    roomInput.addEventListener("input",()=>{roomInput.value=roomInput.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6)});
+    document.querySelector("#copy").addEventListener("click",async()=>{
+      const input=document.querySelector("#invite-link");
+      try{await navigator.clipboard.writeText(input.value);setNotice(gameNotice,"Invite link copied.")}catch{input.select();document.execCommand("copy");setNotice(gameNotice,"Invite link copied.")}
+    });
+    document.querySelector("#new-round").addEventListener("click",()=>send({type:"restart"}));
+    document.querySelector("#leave").addEventListener("click",()=>{
+      intentionallyLeaving=true;clearTimeout(reconnectTimer);send({type:"leave"});if(socket)socket.close();socket=null;session=null;gameState=null;saveSession();lobby.classList.remove("hidden");game.classList.add("hidden");history.replaceState(null,"",location.pathname);setNotice(lobbyNotice,"You left the room.");
+    });
+    const inviteRoom=new URLSearchParams(location.search).get("room");
+    if(inviteRoom)roomInput.value=inviteRoom.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
+    if(session){lobby.classList.add("hidden");game.classList.remove("hidden");document.querySelector("#room-label").textContent=session.code;document.querySelector("#invite-link").value=location.origin+location.pathname+"?room="+encodeURIComponent(session.code);connect()}
+  </script>
+</body>
+</html>
